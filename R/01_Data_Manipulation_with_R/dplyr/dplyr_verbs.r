@@ -24,4 +24,14 @@ counties_selected %>%
 counties_selected %>%
 	mutate(public_workers = population * public_work / 100)
 
+# Add a new variable proportion_women with the fraction of the county's population made up of women
+counties_selected %>%
+	mutate(proportion_women = women / population)
 
+# Sussex County in Virginia is more than two thirds male: this is because of two men's prisons in the county
+
+counties %>%
+	select(state, county, population, men, women) %>%
+	mutate(proportion_men = men / population) %>%
+	filter(population > 10000) %>%
+	arrange(desc(proportion_men))
