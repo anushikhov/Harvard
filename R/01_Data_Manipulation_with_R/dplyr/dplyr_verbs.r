@@ -1,4 +1,4 @@
-
+# Basic dplyr verbs: select, mutate, filter, arrange
 
 counties_selected <- counties %>%
 select(state, county, population, private_work, public_work, self_employed)
@@ -29,7 +29,6 @@ counties_selected %>%
 	mutate(proportion_women = women / population)
 
 # Sussex County in Virginia is more than two thirds male: this is because of two men's prisons in the county
-
 counties %>%
 	select(state, county, population, men, women) %>%
 	mutate(proportion_men = men / population) %>%
