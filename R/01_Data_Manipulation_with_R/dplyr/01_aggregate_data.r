@@ -15,6 +15,6 @@ counties_selected %>%
 	mutate(population_walk = population * walk / 100) %>%
 	count(state, wt = population_walk, sort = TRUE)
 
-# While California had the largest total populatoin, 
+# While California had the largest total population, 
 # New York state has the largest number of people who walk to work.
 
