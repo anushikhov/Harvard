@@ -27,7 +27,7 @@ Supply wt to perform weighted counts, switching the summary from n = n() to n = 
 
 The **summarize** verb takes many observations and turns them into one observation.  
 
-# To know the total populaton of the US  
+&emsp;&emsp;&emsp;&emsp; ` # To know the total populaton of the US  `  
 &emsp;&emsp;&emsp;&emsp; ` counties %>% `     
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ` summarize(total_population = sum(population)) `  
 
