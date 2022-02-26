@@ -36,4 +36,34 @@ Multiple variables can be defined in a summarize and each can be aggregated in d
 &emsp;&emsp;&emsp;&emsp; ` counties %>% `   
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ` summarize(total_population = sum(population), `  
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ` average_unemployment = mean(unemployment) ` 
+**Summary functions**  
+
+` sum() `  
+` mean() `  
+` median() `  
+` min() `  
+` max() `  
+` n() `  - for the size of the group  
+
+Summarizing the entire table is useful, but ideally we want to aggregate within groups:
+
+&emsp;&emsp;&emsp;&emsp; ` # Find the total population within each state `  
+&emsp;&emsp;&emsp;&emsp; ` counties %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ` group_by(state) %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ` summarize(total_pop = sum(population), `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ` average_unemployment = mean(unemployment)) %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` arrange(desc(average_unemployment)) `  
+
+You can group by multiple columns at the same time:
+
+&emsp;&emsp;&emsp;&emsp; ` counties %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ` select(state, metro, county, population) %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ` group_by(state, metro) %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ` summarize(total_pop = sum(population)) `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ` # Not to keep state as group `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ` ungroup() `  
+
+
+
+
 
