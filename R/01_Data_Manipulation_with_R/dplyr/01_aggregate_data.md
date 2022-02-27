@@ -63,7 +63,19 @@ You can group by multiple columns at the same time:
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ` # Not to keep state as group `  
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ` ungroup() `  
 
+Use **top_n** to keep the most extreme observations from each group. Like summarize, it operates on a grouped table. The function takes two arguments - the number of observations you want from each group and the column you want to weight by.
 
+&emsp;&emsp;&emsp;&emsp;` counties_selected <- counties %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` select(state, county, population, unemployment, income) `  
 
+&emsp;&emsp;&emsp;&emsp;` counties_selected %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` group_by(state) %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` top_n(1, population) `  
+
+&emsp;&emsp;&emsp;&emsp;` counties_selected %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` group_by(state) %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` top_n(3, unemployment) `  
+
+**top_n** is often used when creating graphs, we're interested in pulling the extreme examples to include in the visualization.
 
 

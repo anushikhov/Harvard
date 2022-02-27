@@ -46,3 +46,33 @@ counties_selected %>%
 	summarize(total_pop = sum(population)) %>%
 # Calculate the average state population in each region and the median state population in each region.
 	summarize(average_pop = mean(total_pop), median_pop = median(total_pop))
+
+# Find the county in each region with the highest percentage of citizens who walk to work.
+counties_selected <- counties %>%
+	select(region, state, county, metro, population, walk)
+counties_selected %>%
+	group_by(region) %>%
+	top_n(1, walk)
+
+# Calculate the average income of counties within each region and state.
+# Find the highest-income state in each region.
+counties_selected <- counties %>%
+	select(region, state, county, population, income)
+counties_selected %>%
+	group_by(region, state) %>%
+	summarize(average_income = mean(income)) %>%
+	top_n(1, average_income)
+
+# In how many states do more people live in metro areas than non-metro areas?
+counties_selected <- counties %>%
+	select(state, metro, population)
+# For each combination of state and metro, find the total population.
+counties_selected %>%
+	group_by(state, metro) %>%
+	summarize(total_pop = sum(population)) %>%
+# Extract the most populated row from each state.
+	top_n(1, total_pop) %>%
+# Ungroup, then count how often Metro or Nonmetro appears  
+# to see how many states have more people living in those areas.
+	ungroup() %>%
+	count(metro)
