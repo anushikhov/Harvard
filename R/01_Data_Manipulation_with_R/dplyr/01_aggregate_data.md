@@ -35,7 +35,7 @@ Multiple variables can be defined in a summarize and each can be aggregated in d
 
 &emsp;&emsp;&emsp;&emsp; ` counties %>% `   
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ` summarize(total_population = sum(population), `  
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ` average_unemployment = mean(unemployment) `   
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ` average_unemployment = mean(unemployment)) `   
 **Summary functions**  
 
 ` sum() `  
