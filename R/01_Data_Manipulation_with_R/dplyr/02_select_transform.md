@@ -64,3 +64,26 @@ Compare the select and rename:
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` rename(unemployment_rate = unemployment) `  
 
 The rename verb is useful for changing the name of a column that comes out of another verb.
+
+# Transmute  
+
+Transmute is like a combination of select and mutate, it returns a subset of columns that are transformed and changed at the same time.  
+ 
+&emsp;&emsp;&emsp;&emsp;` counties %>% `   
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` transmute(state, county, population, franction_men = men / population) `  
+
+Unlike select, we are able to do calculations at the same time.
+
+Can be used instead of mutate&select.
+
+&emsp;&emsp;&emsp;&emsp;` counties %>% `   
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` transmute(state, county, population, unemployed_people = population * unemployment / 100) `  
+
+The transmute verb gives you control of what variables you keep, what new variables you calculate and what you drop.  
+
+**select and transmute keep only specified values, select cannot changes values, while transmute can**  
+**rename and mutate keep other variables as well, rename cannot change values, while mutate can**  
+
+rename - leaves the columns you don't mention alone; doesn't allow you to calculate or change values
+transmue - must mention all the columns you keep; allows you to calculate or change values
+mutate - leaves the columns you don't mention alone; allows you to calculate or change values  
