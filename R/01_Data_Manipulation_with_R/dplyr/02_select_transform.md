@@ -1,4 +1,4 @@
-Select and transform columns  
+### Select and transform columns  
 
 Select a set of columns:  
 
@@ -42,3 +42,25 @@ Select can also be used to remove variables from a table by adding a '-' in fron
 &emsp;&emsp;&emsp;&emsp;` counties %>% `  
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` select(-census_id) `  
 
+### Renaming columns   
+
+The new column name goes on the left, the old column name goes on the right:  
+
+&emsp;&emsp;&emsp;&emsp;` counties_selected %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` rename(unemployment_rate = unemployment) `  
+
+The rename can be done as a part of select:  
+
+&emsp;&emsp;&emsp;&emsp;` counties_selected %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` select(state, county, population, unemployment_rate = unemployment) `  
+
+Compare the select and rename:  
+
+&emsp;&emsp;&emsp;&emsp;` counties %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` select(state, county, population, unemployment_rate = unemployment) `  
+
+&emsp;&emsp;&emsp;&emsp;` counties %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` select(state, county, population, unemployment) %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` rename(unemployment_rate = unemployment) `  
+
+The rename verb is useful for changing the name of a column that comes out of another verb.
