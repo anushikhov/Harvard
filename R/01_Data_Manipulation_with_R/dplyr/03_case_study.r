@@ -21,4 +21,30 @@ ggplot(selected_names, aes(x = year, y = number, color = name)) + geom_line()
 
 # Names Steven and Thomas were common in the 1950s, but Matthew became common more recently.
 
+# Find the year each name is most common.  
+babynames %>%
+	group_by(year) %>%
+	mutate(year_total = sum(number)) %>%
+	ungroup() %>%
+	mutate(fraction = number / year_total) %>%
+	group_by(name) %>%
+	top_n(1, fraction)
 
+# Normalize by a different metric.
+# Divide each name by the maximum for that name. Every name will peak at 1.
+babynames %>%
+	group_by(name) %>%
+	mutate(name_total = sum(number), name_max = max(number)) %>%
+	ungroup() %>%
+	mutate(fraction_max = number / name_max)
+
+# Visualize the normalized popularity of each name.
+
+names_normalized <- babynames %>%
+	group_by(name) %>%
+	mutate(name_total = sum(number), name_max = max(number)) %>%
+	ungroup() %>%
+	mutate(fraction_max = number / name_max)
+names_filtered <- names_normalized %>%
+	filter(name  %in% c("Steven", "Thomas", "Matthew"))
+	ggplot(names_filtered, aes(x = year, y = fraction_max, color = name)) + geom_line()
