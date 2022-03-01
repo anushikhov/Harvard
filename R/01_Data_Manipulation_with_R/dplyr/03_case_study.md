@@ -51,4 +51,36 @@ group_by() - we only want to add up within each year
 
 Visualize the normalized change in popularity  
 
-Picking a few names and calculating each of them as a fraction of their peak is a type of "normalizing" a name, where we're focused on the relative change within each name rather than the overall popularity of the name.
+Picking a few names and calculating each of them as a fraction of their peak is a type of "normalizing" a name, where we're focused on the relative change within each name rather than the overall popularity of the name.  
+
+### Window function  
+
+Takes a vector and returns a vector of the same length.  
+
+Lag - to move each item to the right by one.  
+
+&emsp;&emsp;&emsp;&emsp;` v <- c(1, 3, 6, 14) `  
+&emsp;&emsp;&emsp;&emsp;` v `  
+[1] 1 3 6 14  
+&emsp;&emsp;&emsp;&emsp;` lag(v) `  
+[1] NA 1 3 6  
+
+What is each value once we subtracted the previous one?  
+&emsp;&emsp;&emsp;&emsp;` v - lag(v) `  
+
+Using ratios to describe the difference in the frequence of a baby name between consecutive years.  
+
+The biggest jumps:  
+&emsp;&emsp;&emsp;&emsp;` babynames_fraction %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` filter(name == "Matthew") %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` arrange(year) %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` mutate(difference = fraction - lag(fraction)) %>% `   
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` arrange(desc(difference)) `  
+
+Changes with every name:  
+&emsp;&emsp;&emsp;&emsp;` babynames_fraction %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` arrange(name, year) %>% `   
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` mutate(difference = fraction - lag(fraction)) %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` group_by(name) %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` arrange(desc(difference)) `  
+

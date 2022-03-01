@@ -47,4 +47,31 @@ names_normalized <- babynames %>%
 	mutate(fraction_max = number / name_max)
 names_filtered <- names_normalized %>%
 	filter(name  %in% c("Steven", "Thomas", "Matthew"))
-	ggplot(names_filtered, aes(x = year, y = fraction_max, color = name)) + geom_line()
+ggplot(names_filtered, aes(x = year, y = fraction_max, color = name)) + geom_line()
+
+# Use ratios to descibe the frequence of a name.  
+
+babynames_fraction %>%
+	arrange(name, year) %>% 
+	group_by(name) %>%
+	mutate(ratio = fraction / lag(fraction))
+
+# The first observation for each name is missing a ratio, since there is no previous year.  
+
+# Find the biggest jumps in names.
+babynames_ratio_filtered <- babynames_fraction %>%
+	arrange(name, year) %>%
+	group_by(name) %>%
+	mutate(ratio = fraction / lag(fraction)) %>%
+	filter(fraction >= 0.00001)
+# Extract the largest ratio from each name.
+babynames_ratios_filtered %>%
+	top_n(1, ratio) %>%
+# Sort the ratio column in descending order.
+	arrange(desc(ratio)) %>%
+# Filter for fractions greater than or equal to 0.001.
+	filter(fraction >= 0.001)
+
+# Some of these can be interpreted.
+# Grover Cleveland was a president elected in 1884.
+
