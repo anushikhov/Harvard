@@ -2,6 +2,7 @@ sets <- read.table("/home/an/data/sets.csv", header=T, sep=";")
 themes <- read.table("/home/an/data/themes.csv", header=T, sep=",")
 
 # Def use read.csv() instead!!!!
+# read.table() messes up the view
 
 install.packages("dplyr")
 library("dplyr")
