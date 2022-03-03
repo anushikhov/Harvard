@@ -41,4 +41,23 @@ inventory_parts %>%
 # For an inner_join, either direction will yield a table that contains the same information.
 # The columns will appear in a different order depending on which table comes first.
 
+# Connect 
+# sets - a table that tells us about each LEGO kit
+# inventories - a table that tells us the specific version of a given set
+# inventory_parts - a table which tells us how many of each part is available in each LEGO kit
 
+# If you were building a Batman LEGO set, sets would tell you the name of the set,
+# inventories would give you IDs for each of the versions of the set,
+# and inventory_parts would tell you how many of each part would be in each version.
+sets %>%
+	inner_join(inventories, by = "set_num") %>%
+	inner_join(inventory_parts, by = c("id" = "inventory_id"))
+
+# What is the most common color?
+sets %>%
+	inner_join(inventories, by = "set_num") %>%
+	inner_join(inventory_parts, by = c("id" = "inventory_id")) %>%
+	inner_join(colors, by = c("color_id" = "id"), suffix = c("_set", "_color")) %>%
+	count(name_color, sort = TRUE)
+
+# Black and white are the two most prominent colors.

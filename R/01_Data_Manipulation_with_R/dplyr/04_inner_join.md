@@ -54,6 +54,14 @@ Paying close attention to the number of observations before and after a join is 
 
 An `inner_join` works the same way with either table in either position. The table that is specified first is arbitrary, wince you will end up with the same information in the resulting table either way.  
 
+### Joining multiple tables  
+
+You can string together multiple joins with `inner_join` and the pipe `%>%`.
+&emsp;&emsp;&emsp;&emsp;` sets %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` inner_join(inventories, by = "set_num") %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` inner_join(themes, by = c("theme_id" = "id"), suffix = c("_set", "_theme")) `  
+
+
 
 
 
