@@ -33,9 +33,27 @@ You assign the loaded data set to the variable. You can load multiple data sets 
 
 The information we need isn't always confined to one table. 
 
+Inner joins select records that have matching values in both tables.  
+
 Joining sets to themes:  
 
 &emsp;&emsp;&emsp;&emsp;`sets %>% `  
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` inner_join(themes, by = c("theme_id" = "id")) `  
+
+### Joining with a one-to-many relationship  
+
+An inner join keeps an observation only if it has an exact match between the first and second tables.  
+
+When the variables we're joining by have the same name, we can write the name once, e.g. "set_num".  
+
+&emsp;&emsp;&emsp;&emsp;` sets %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` inner_join(inventories, by = "set_num") %>% `  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;` filter(version == 1) `  
+
+Paying close attention to the number of observations before and after a join is an important part of understanding your data.  
+
+An `inner_join` works the same way with either table in either position. The table that is specified first is arbitrary, wince you will end up with the same information in the resulting table either way.  
+
+
 
 
